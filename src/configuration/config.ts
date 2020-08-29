@@ -1,0 +1,12 @@
+export const dev = {
+    API_URL: 'http://localhost:9090/',
+}
+// export const prod = {}
+// const config = process.env.ENV === 'production' ? prod : dev
+const config = dev
+
+export default {
+    // Add common config values here
+    MAX_ATTACHMENT_SIZE: 5000000,
+    ...config,
+}
