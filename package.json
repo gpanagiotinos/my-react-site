@@ -6,8 +6,9 @@
   "author": "Georgios Panagiotinos",
   "license": "MIT",
   "scripts": {
-    "build": "webpack --mode production",
-    "start": "webpack-dev-server --watch"
+    "build": "webpack --config webpack.config.prod.js --mode production",
+    "start": "webpack-dev-server --watch",
+    "heroku-postbuild": "yarn build"
   },
   "dependencies": {
     "@material-ui/core": "^4.10.2",
