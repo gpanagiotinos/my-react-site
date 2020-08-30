@@ -6,7 +6,8 @@
   "author": "Georgios Panagiotinos",
   "license": "MIT",
   "scripts": {
-    "build": "webpack --config webpack.config.prod.js --mode production",
+    "build": "NODE_OPTIONS=--max_old_space_size=8192 webpack --config webpack.config.prod.js --mode production",
+    "docker": "NODE_OPTIONS=--max_old_space_size=8192 webpack --config webpack.config.prod.js --mode production --silence",
     "start": "webpack-dev-server --watch",
     "heroku-postbuild": "yarn build"
   },

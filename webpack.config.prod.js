@@ -4,6 +4,7 @@ const webpack = require('webpack')
 
 module.exports = {
     mode: 'none',
+    stats: 'errors-only',
     entry: {
         app: path.join(__dirname, 'src', 'index.tsx'),
     },
