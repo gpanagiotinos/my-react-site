@@ -1,9 +1,10 @@
 export const dev = {
     API_URL: 'http://localhost:9090/',
 }
-// export const prod = {}
-// const config = process.env.ENV === 'production' ? prod : dev
-const config = dev
+export const prod = {
+    API_URL: 'https://panagiotinos-golang.herokuapp.com/',
+}
+const config = process.env.ENV === 'production' ? prod : dev
 
 export default {
     // Add common config values here

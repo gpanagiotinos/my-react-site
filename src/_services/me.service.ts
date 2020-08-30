@@ -13,5 +13,5 @@ async function me<T>(): Promise<T> {
             'Content-Type': 'application/json',
         },
     }
-    return await post(`${config.API_URL}hello`, requestOptions)
+    return await post(`${config.API_URL}me`, requestOptions)
 }
