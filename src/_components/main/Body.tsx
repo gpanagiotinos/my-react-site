@@ -13,7 +13,7 @@ const Body: React.FC = () => {
         <Grid container alignContent="center" className={classes.toolbar}>
             <Featured />
             <Grid item xs={12}>
-                <div style={{ minHeight: '1000px' }}></div>
+                {/* <div style={{ minHeight: '1000px' }}></div> */}
             </Grid>
         </Grid>
     )

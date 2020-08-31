@@ -74,9 +74,6 @@ const FeaturedView: React.FC<Props> = (props: Props) => {
             <Grid item xs={10}>
                 <Grid container justify="space-around">
                     <Grid className={classes.topContainer} item xs={10}>
-                        {/* <Typography className={classes.title} component="h2" variant="h3" color="initial">
-                            Hi, I am {props.firstName}
-                        </Typography> */}
                         <CustomTypography loading={props.loading} className={classes.title}>
                             Hi, I am {props.firstName}
                         </CustomTypography>
