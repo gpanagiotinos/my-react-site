@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid, Avatar } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
 import { CustomTypography, CustomAvatar } from '@/_components/general'
 import { Theme, makeStyles } from '@material-ui/core/styles'
 

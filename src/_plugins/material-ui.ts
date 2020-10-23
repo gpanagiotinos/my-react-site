@@ -1,3 +1,14 @@
+import { Palette, PaletteOptions } from '@material-ui/core/styles/createPalette'
+
+declare module '@material-ui/core/styles/createPalette' {
+    interface Palette {
+        resume: Palette['primary']
+    }
+
+    interface PaletteOptions {
+        resume: PaletteOptions['primary']
+    }
+}
 import { createMuiTheme } from '@material-ui/core/styles'
 
 const theme = createMuiTheme({
@@ -20,6 +31,11 @@ const theme = createMuiTheme({
         text: {
             primary: '#545454',
             secondary: '#ff4a57',
+        },
+        resume: {
+            main: '#333333',
+            dark: '#666666',
+            contrastText: '#f5f5f5',
         },
     },
 })

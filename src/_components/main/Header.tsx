@@ -1,22 +1,18 @@
 import React from 'react'
 import { AppBar, Toolbar, Grid } from '@material-ui/core'
-import Button from '@material-ui/core/Button'
-import { withStyles, Theme, makeStyles } from '@material-ui/core/styles'
+import { Theme, makeStyles } from '@material-ui/core/styles'
+import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles((theme: Theme) => ({
     headerToolBar: {
         backgroundColor: theme.palette.background.paper,
-        // borderBottom: `1px solid ${theme.palette.divider}`,
-    },
-}))
-const ToolBarButton = withStyles((theme: Theme) => ({
-    root: {
+        textDecoration: 'none',
         boxShadow: 'none',
         textTransform: 'none',
         fontWeight: 600,
         color: theme.palette.text.secondary,
     },
-}))(Button)
+}))
 
 const Header: React.FC = () => {
     const classes = useStyles()
@@ -25,16 +21,24 @@ const Header: React.FC = () => {
             <Toolbar className={classes.headerToolBar}>
                 <Grid justify="flex-end" container spacing={4}>
                     <Grid item>
-                        <ToolBarButton className={classes.headerToolBar}>resume</ToolBarButton>
+                        <Link to="/resume" className={classes.headerToolBar}>
+                            resume
+                        </Link>
                     </Grid>
                     <Grid item>
-                        <ToolBarButton className={classes.headerToolBar}>about</ToolBarButton>
+                        <Link to="/" className={classes.headerToolBar}>
+                            about
+                        </Link>
                     </Grid>
                     <Grid item>
-                        <ToolBarButton className={classes.headerToolBar}>blog</ToolBarButton>
+                        <Link to="/" className={classes.headerToolBar}>
+                            blog
+                        </Link>
                     </Grid>
                     <Grid item>
-                        <ToolBarButton className={classes.headerToolBar}>contact</ToolBarButton>
+                        <Link to="/" className={classes.headerToolBar}>
+                            contact
+                        </Link>
                     </Grid>
                 </Grid>
             </Toolbar>

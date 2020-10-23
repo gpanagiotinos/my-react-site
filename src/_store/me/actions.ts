@@ -12,9 +12,16 @@ export const setMeAction = (): AppThunk => (dispatch) => {
             summary: null,
             email: null,
             title: null,
+            address: null,
+            mobile: null,
             picture: '',
             socials: [],
         },
+        work: null,
+        education: null,
+        skills: null,
+        interests: null,
+        information: null,
     }
     dispatch(setMe(initialMe, true, null))
     meService

@@ -35,9 +35,9 @@ module.exports = {
             {
                 test: /\.(sa|sc|c)ss$/,
                 use: [
-                  { loader: "style-loader" },
-                  { loader: "css-loader" },
-                  { loader: "sass-loader" }
+                    { loader: "style-loader" },
+                    { loader: "css-loader" },
+                    { loader: "sass-loader" }
                 ]
             },
             // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
@@ -59,10 +59,10 @@ module.exports = {
         historyApiFallback: true,
         proxy: {
             '/img': {
-              target: 'http://localhost:9090',
-              secure: false
+                target: 'http://localhost:9090',
+                secure: false
             }
-          }
+        }
     },
     // When importing a module whose path matches one of the following, just
     // assume a corresponding global variable exists and use that instead.

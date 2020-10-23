@@ -41,20 +41,19 @@ const useStyles = makeStyles((theme: Theme) => ({
         marginBottom: '5px',
     },
     linkedInIcon: {
+        color: theme.palette.divider,
         marginRight: '8px',
-        fontSize: 30,
+        fontSize: 18,
         '&:hover': {
             color: '#0072b1',
         },
     },
     gitHubIcon: {
-        fontSize: 29,
+        color: theme.palette.divider,
+        fontSize: 17,
         '&:hover': {
             color: '#211f1f',
         },
-    },
-    linkIcons: {
-        color: theme.palette.divider,
     },
 }))
 
@@ -67,7 +66,7 @@ const Footer: React.FC<Props> = (props: Props) => {
     // const preventDefault = (event: React.SyntheticEvent) => event.preventDefault()
 
     return (
-        <AppBar color="transparent" elevation={0} position="fixed" className={classes.footerAppBar}>
+        <AppBar color="transparent" elevation={0} position="relative" className={classes.footerAppBar}>
             <Grid container alignContent="center" className={classes.footer}>
                 <Grid item xs={12}>
                     <Grid container justify="center">
@@ -112,17 +111,32 @@ const Footer: React.FC<Props> = (props: Props) => {
                         <Grid item xs={4}>
                             <CustomTypography loading={props.state.isFetching.toString()} align="center">
                                 {props.state.me?.basics.socials.map(({ network, url }, index) => {
-                                    return (
-                                        <Link
-                                            key={index}
-                                            target="_blank"
-                                            component="a"
-                                            className={classes.linkIcons}
-                                            href={url != null ? url : '#'}
-                                        >
-                                            <MaterialIcon icon={network} />
-                                        </Link>
-                                    )
+                                    switch (network) {
+                                        case 'GitHub':
+                                            return (
+                                                <Link
+                                                    key={index}
+                                                    target="_blank"
+                                                    component="a"
+                                                    href={url != null ? url : '#'}
+                                                >
+                                                    <MaterialIcon className={classes.gitHubIcon} icon={network} />
+                                                </Link>
+                                            )
+                                        case 'LinkedIn':
+                                            return (
+                                                <Link
+                                                    key={index}
+                                                    target="_blank"
+                                                    component="a"
+                                                    href={url != null ? url : '#'}
+                                                >
+                                                    <MaterialIcon className={classes.linkedInIcon} icon={network} />
+                                                </Link>
+                                            )
+                                        default:
+                                            return null
+                                    }
                                 })}
                             </CustomTypography>
                         </Grid>
