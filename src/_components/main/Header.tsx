@@ -1,7 +1,8 @@
 import React from 'react'
 import { AppBar, Toolbar, Grid } from '@material-ui/core'
-import { Theme, makeStyles } from '@material-ui/core/styles'
+import { Theme, makeStyles, useTheme } from '@material-ui/core/styles'
 import { Link } from 'react-router-dom'
+import useMediaQuery from '@material-ui/core/useMediaQuery'
 
 const useStyles = makeStyles((theme: Theme) => ({
     headerToolBar: {
@@ -16,10 +17,15 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const Header: React.FC = () => {
     const classes = useStyles()
+    const theme = useTheme()
     return (
         <AppBar color="transparent" position="fixed" elevation={0}>
             <Toolbar className={classes.headerToolBar}>
-                <Grid justify="flex-end" container spacing={4}>
+                <Grid
+                    justify={useMediaQuery(theme.breakpoints.up('md')) ? 'flex-end' : 'flex-start'}
+                    container
+                    spacing={4}
+                >
                     <Grid item>
                         <Link to="/resume" className={classes.headerToolBar}>
                             resume
