@@ -12,6 +12,21 @@ const useStyles = makeStyles((theme: Theme) => ({
         textTransform: 'none',
         fontWeight: 600,
         color: theme.palette.text.secondary,
+        fontSize: '14px',
+        [theme.breakpoints.down('md')]: {
+            fontSize: '20px',
+        },
+    },
+    item: {
+        paddingRight: '40px',
+        borderRight: '0',
+        [theme.breakpoints.down('md')]: {
+            padding: '0 20px',
+            borderRight: `2px solid ${theme.palette.text.secondary}`,
+        },
+    },
+    lastItem: {
+        paddingLeft: '20px',
     },
 }))
 
@@ -22,21 +37,21 @@ const Header: React.FC = () => {
         <AppBar color="transparent" position="fixed" elevation={0}>
             <Toolbar className={classes.headerToolBar}>
                 <Grid
-                    justify={useMediaQuery(theme.breakpoints.up('md')) ? 'flex-end' : 'flex-start'}
+                    justify={useMediaQuery(theme.breakpoints.up('md')) ? 'flex-end' : 'center'}
                     container
-                    spacing={4}
+                    spacing={useMediaQuery(theme.breakpoints.up('md')) ? 4 : 10}
                 >
-                    <Grid item>
+                    {/* <Grid item className={classes.item}>
                         <Link to="/resume" className={classes.headerToolBar}>
                             resume
                         </Link>
                     </Grid>
-                    <Grid item>
+                    <Grid item className={classes.item}>
                         <Link to="/" className={classes.headerToolBar}>
                             about
                         </Link>
                     </Grid>
-                    <Grid item>
+                    <Grid item className={classes.item}>
                         <Link to="/" className={classes.headerToolBar}>
                             blog
                         </Link>
@@ -45,7 +60,19 @@ const Header: React.FC = () => {
                         <Link to="/" className={classes.headerToolBar}>
                             contact
                         </Link>
-                    </Grid>
+                    </Grid> */}
+                    <Link to="/resume" className={[classes.item, classes.headerToolBar].join(' ')}>
+                        resume
+                    </Link>
+                    <Link to="/" className={[classes.item, classes.headerToolBar].join(' ')}>
+                        about
+                    </Link>
+                    <Link to="/" className={[classes.item, classes.headerToolBar].join(' ')}>
+                        blog
+                    </Link>
+                    <Link to="/" className={[classes.headerToolBar, classes.lastItem].join(' ')}>
+                        contact
+                    </Link>
                 </Grid>
             </Toolbar>
         </AppBar>

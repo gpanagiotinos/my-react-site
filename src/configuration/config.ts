@@ -4,8 +4,8 @@ export const dev = {
 export const prod = {
     API_URL: 'https://panagiotinos-golang.herokuapp.com/api/',
 }
-// const config = process.env.ENV === 'production' ? prod : dev
-const config = prod
+const config = process.env.ENV === 'production' ? prod : dev
+// const config = prod
 export default {
     // Add common config values here
     MAX_ATTACHMENT_SIZE: 5000000,
