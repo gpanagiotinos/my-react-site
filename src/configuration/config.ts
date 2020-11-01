@@ -4,7 +4,7 @@ export const dev = {
 export const prod = {
     API_URL: 'https://panagiotinos-golang.herokuapp.com/api/',
 }
-const config = process.env.ENV === 'production' ? prod : dev
+const config = process.env.REACT_ENV === 'production' ? prod : dev
 // const config = prod
 export default {
     // Add common config values here
