@@ -26,7 +26,10 @@ const useStyles = makeStyles((theme: Theme) => ({
         },
     },
     lastItem: {
-        paddingLeft: '20px',
+        paddingLeft: 0,
+        [theme.breakpoints.down('md')]: {
+            paddingLeft: '20px',
+        },
     },
 }))
 
@@ -37,42 +40,27 @@ const Header: React.FC = () => {
         <AppBar color="transparent" position="fixed" elevation={0}>
             <Toolbar className={classes.headerToolBar}>
                 <Grid
-                    justify={useMediaQuery(theme.breakpoints.up('md')) ? 'flex-end' : 'center'}
+                    justify={useMediaQuery(theme.breakpoints.down('md')) ? 'center' : 'flex-end'}
                     container
-                    spacing={useMediaQuery(theme.breakpoints.up('md')) ? 4 : 10}
+                    spacing={useMediaQuery(theme.breakpoints.down('md')) ? 4 : 6}
                 >
-                    {/* <Grid item className={classes.item}>
-                        <Link to="/resume" className={classes.headerToolBar}>
-                            resume
-                        </Link>
-                    </Grid>
-                    <Grid item className={classes.item}>
-                        <Link to="/" className={classes.headerToolBar}>
-                            about
-                        </Link>
-                    </Grid>
-                    <Grid item className={classes.item}>
-                        <Link to="/" className={classes.headerToolBar}>
-                            blog
-                        </Link>
-                    </Grid>
-                    <Grid item>
-                        <Link to="/" className={classes.headerToolBar}>
-                            contact
-                        </Link>
-                    </Grid> */}
-                    <Link to="/resume" className={[classes.item, classes.headerToolBar].join(' ')}>
+                    <Grid
+                        item
+                        component={Link}
+                        to="/resume"
+                        className={[classes.item, classes.headerToolBar].join(' ')}
+                    >
                         resume
-                    </Link>
-                    <Link to="/" className={[classes.item, classes.headerToolBar].join(' ')}>
+                    </Grid>
+                    <Grid item component={Link} to="/" className={[classes.item, classes.headerToolBar].join(' ')}>
                         about
-                    </Link>
-                    <Link to="/" className={[classes.item, classes.headerToolBar].join(' ')}>
+                    </Grid>
+                    <Grid item component={Link} to="/" className={[classes.item, classes.headerToolBar].join(' ')}>
                         blog
-                    </Link>
-                    <Link to="/" className={[classes.headerToolBar, classes.lastItem].join(' ')}>
+                    </Grid>
+                    <Grid item component={Link} to="/" className={[classes.headerToolBar, classes.lastItem].join(' ')}>
                         contact
-                    </Link>
+                    </Grid>
                 </Grid>
             </Toolbar>
         </AppBar>

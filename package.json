@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "build": "NODE_OPTIONS=--max_old_space_size=8192 webpack --config webpack.config.prod.js --mode production",
-    "docker": "NODE_OPTIONS=--max_old_space_size=8192 webpack --config webpack.config.prod.js --mode production",
+    "docker": "NODE_OPTIONS=--max_old_space_size=8192 ./node_modules/.bin/webpack --config webpack.config.prod.js --mode production",
     "start": "webpack-dev-server --hot --mode development",
     "heroku-postbuild": "yarn build"
   },

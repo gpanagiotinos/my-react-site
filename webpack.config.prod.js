@@ -48,7 +48,10 @@ module.exports = {
             favicon: './src/favicon.ico'
 
         }),
-        new webpack.HashedModuleIdsPlugin()
+        new webpack.HashedModuleIdsPlugin(),
+        new webpack.DefinePlugin({
+            'process.env.REACT_ENV': JSON.stringify('production')
+        })
     ],
     output: {
         filename: '[name].[contenthash].js',
