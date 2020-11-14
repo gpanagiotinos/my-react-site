@@ -58,8 +58,13 @@ const Header: React.FC = () => {
                     <Grid item component={Link} to="/" className={[classes.item, classes.headerToolBar].join(' ')}>
                         blog
                     </Grid>
-                    <Grid item component={Link} to="/" className={[classes.headerToolBar, classes.lastItem].join(' ')}>
-                        contact
+                    <Grid
+                        item
+                        component={Link}
+                        to="/chat"
+                        className={[classes.headerToolBar, classes.lastItem].join(' ')}
+                    >
+                        chat
                     </Grid>
                 </Grid>
             </Toolbar>
