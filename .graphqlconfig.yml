@@ -1,0 +1,15 @@
+projects:
+  myreactsitegqlapi:
+    schemaPath: src/graphql/schema.json
+    includes:
+      - /graphql/**/*.ts
+    excludes:
+      - ./amplify/**
+    extensions:
+      amplify:
+        codeGenTarget: typescript
+        generatedFileName: src/_services/chat.service.ts
+        docsFilePath: src/graphql
+extensions:
+  amplify:
+    version: 3

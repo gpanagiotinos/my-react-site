@@ -5,25 +5,29 @@ export async function http<T>(path: string, requestOptions: RequestInit): Promis
     // const george = await fetch(path, requestOptions)
     // const text = await george.text()
     // console.log(text)
+    console.log(data)
     try {
-        const response = await data.json()
-        if (!data.ok) {
-            throw new Error(response.statusText)
+        if (data.status >= 400 && data.status < 500) {
+            const response = await data.json()
+            throw new Error(response.message)
+        } else if (!data.ok) {
+            throw new Error(data.statusText)
+        } else {
+            const response = await data.json()
+            return response
         }
-        return response
     } catch (error) {
         throw new Error(error)
     }
 }
 
 export async function get<T>(path: string, requestOptions: RequestInit = { method: 'get', mode: 'cors' }): Promise<T> {
-    console.log(requestOptions)
     return await http<T>(path, requestOptions)
 }
 
 export async function post<T>(
     path: string,
-    requestOptions: RequestInit = { method: 'post', mode: 'cors' },
+    requestOptions: RequestInit = { method: 'post', mode: 'cors', body: null, credentials: 'include' },
 ): Promise<T> {
     return await http<T>(path, requestOptions)
 }

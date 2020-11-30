@@ -1,22 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { bindActionCreators, Dispatch } from 'redux'
-import { setMeAction } from '@/_store/me/actions'
 import { MeState } from '@/_store/me/types'
 import { RootState } from '@/_store'
 import ResumeView from '@/_components/resume/ResumeView'
 
 type Props = {
     state: MeState
-    actions?: {
-        setMe: typeof setMeAction
-    }
 }
 
 const Resume: React.FC<Props> = (props: Props) => {
-    React.useEffect(() => {
-        props.actions?.setMe()
-    }, [])
     return (
         <ResumeView
             {...{
@@ -37,12 +29,4 @@ function mapStateToProps(state: RootState) {
         state: { ...state.meState },
     }
 }
-function mapDispatchToProps(dispatch: Dispatch) {
-    return {
-        actions: bindActionCreators({ setMe: setMeAction }, dispatch),
-    }
-}
-// interface StateProps {
-//     state: MeState
-// }
-export default connect(mapStateToProps, mapDispatchToProps)(Resume)
+export default connect(mapStateToProps, null)(Resume)

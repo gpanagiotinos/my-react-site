@@ -7,6 +7,7 @@ import Body from '@/_components/main/Body'
 import Footer from '@/_components/main/Footer'
 import Resume from '@/_components/resume/Resume'
 import Chat from '@/_components/chat/Chat'
+import Login from '@/_components/auth/Login'
 import { Grid } from '@material-ui/core'
 import { ThemeProvider } from '@material-ui/styles'
 import theme from '@/_plugins/material-ui'
@@ -24,6 +25,7 @@ const App: React.FC = () => (
                         <Route exact path="/" component={Body} />
                         <Route exact path="/resume" component={Resume} />
                         <Route exact path="/chat" component={Chat} />
+                        <Route exact path="/login" component={Login} />
                     </Switch>
                 </div>
                 <Footer />

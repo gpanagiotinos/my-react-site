@@ -11,7 +11,9 @@ const useStyles = makeStyles((theme: Theme) => ({
         borderRight: 0,
     },
 }))
-// type Props = {}
+// type Props = {
+//     name: string
+// }
 const ChatSideBar: React.FC = () => {
     const classes = useStyles()
     return (

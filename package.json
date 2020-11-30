@@ -8,7 +8,7 @@
   "scripts": {
     "build": "NODE_OPTIONS=--max_old_space_size=8192 webpack --config webpack.config.prod.js --mode production",
     "docker": "NODE_OPTIONS=--max_old_space_size=8192 ./node_modules/.bin/webpack --config webpack.config.prod.js --mode production",
-    "start": "webpack-dev-server --hot --mode development",
+    "start": "NODE_OPTIONS=--max_old_space_size=8192 webpack-dev-server --hot --mode development --host 0.0.0.0",
     "heroku-postbuild": "yarn build"
   },
   "dependencies": {
@@ -17,6 +17,8 @@
     "@material-ui/lab": "^4.0.0-alpha.56",
     "@types/react-router": "^5.1.8",
     "@types/react-router-dom": "^5.1.5",
+    "@types/uuid": "^8.3.0",
+    "aws-amplify": "^3.3.8",
     "cross-fetch": "^3.0.5",
     "dayjs": "^1.9.6",
     "fontsource-roboto": "^2.1.4",
@@ -30,10 +32,11 @@
     "react-router-dom": "^5.1.2",
     "redux": "^4.0.5",
     "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "uuid": "^8.3.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.3",
+    "@babel/core": "^7.7.7",
     "@babel/preset-env": "^7.4.3",
     "@babel/preset-react": "^7.0.0",
     "@types/faker": "^4.1.12",

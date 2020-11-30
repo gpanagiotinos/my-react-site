@@ -9,7 +9,7 @@ module.exports = {
 
     resolve: {
         // Add '.ts' and '.tsx' as resolvable extensions.
-        extensions: ['.ts', '.tsx', '.js'],
+        extensions: ['.ts', '.tsx', '.mjs', '.js', '.gql', '.graphql'],
         alias: {
             '@': path.resolve(__dirname, 'src/')
         }
@@ -43,9 +43,9 @@ module.exports = {
             // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
             {
                 enforce: 'pre',
-                test: /\.js$/,
+                test: /\.(js|mjs)$/,
                 loader: 'source-map-loader',
-            },
+            }
         ],
     },
     plugins: [

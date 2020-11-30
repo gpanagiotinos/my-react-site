@@ -3,6 +3,7 @@ import ChatSideBar from '@/_components/chat/ChatSideBar'
 import ChatBody from '@/_components/chat/ChatBody'
 import { Grid } from '@material-ui/core'
 import { Theme, makeStyles } from '@material-ui/core/styles'
+import { ChatRoom } from '@/_types/chat'
 
 const useStyles = makeStyles((theme: Theme) => ({
     container: {
@@ -13,7 +14,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
 }))
 
-const ChatView: React.FC = () => {
+type Props = {
+    chatRoom: ChatRoom
+}
+
+const ChatView: React.FC<Props> = (props: Props) => {
     const classes = useStyles()
 
     return (
@@ -22,7 +27,7 @@ const ChatView: React.FC = () => {
                 <ChatSideBar />
             </Grid>
             <Grid xs={8} item>
-                <ChatBody />
+                <ChatBody name={props.chatRoom.name} messages={props.chatRoom.messages} />
             </Grid>
         </Grid>
     )

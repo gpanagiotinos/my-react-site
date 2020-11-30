@@ -1,4 +1,6 @@
 import meReducer from '@/_store/me/reducers'
+import chatReducer from '@/_store/chat/reducers'
+import authReducer from '@/_store/auth/reducers'
 import { combineReducers, createStore, applyMiddleware } from 'redux'
 // import { createLogger } from 'redux-logger'
 import thunkMiddleware, { ThunkAction } from 'redux-thunk'
@@ -9,6 +11,8 @@ export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unk
 
 const rootReducer = combineReducers({
     meState: meReducer,
+    chatState: chatReducer,
+    authState: authReducer,
 })
 
 // const loggerMiddleware = createLogger()

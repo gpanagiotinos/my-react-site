@@ -1,8 +1,13 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators, Dispatch } from 'redux'
+import { setMeAction } from '@/_store/me/actions'
 import { AppBar, Toolbar, Grid } from '@material-ui/core'
 import { Theme, makeStyles, useTheme } from '@material-ui/core/styles'
 import { Link } from 'react-router-dom'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
+import { RootState } from '@/_store'
+import { AuthState } from '@/_store/auth/types'
 
 const useStyles = makeStyles((theme: Theme) => ({
     headerToolBar: {
@@ -33,7 +38,17 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
 }))
 
-const Header: React.FC = () => {
+type Props = {
+    state: AuthState
+    actions?: {
+        setMe: typeof setMeAction
+    }
+}
+
+const Header: React.FC<Props> = (props: Props) => {
+    React.useEffect(() => {
+        props.actions?.setMe()
+    }, [])
     const classes = useStyles()
     const theme = useTheme()
     return (
@@ -58,17 +73,45 @@ const Header: React.FC = () => {
                     <Grid item component={Link} to="/" className={[classes.item, classes.headerToolBar].join(' ')}>
                         blog
                     </Grid>
-                    <Grid
-                        item
-                        component={Link}
-                        to="/chat"
-                        className={[classes.headerToolBar, classes.lastItem].join(' ')}
-                    >
-                        chat
-                    </Grid>
+                    {(() => {
+                        if (props.state.auth != null) {
+                            return (
+                                <Grid
+                                    item
+                                    component={Link}
+                                    to="/chat"
+                                    className={[classes.headerToolBar, classes.lastItem].join(' ')}
+                                >
+                                    chat
+                                </Grid>
+                            )
+                        }
+                        return (
+                            <Grid
+                                item
+                                component={Link}
+                                to="/login"
+                                className={[classes.headerToolBar, classes.lastItem].join(' ')}
+                            >
+                                login
+                            </Grid>
+                        )
+                    })()}
                 </Grid>
             </Toolbar>
         </AppBar>
     )
 }
-export default Header
+
+function mapStateToProps(state: RootState) {
+    return {
+        state: { ...state.authState },
+    }
+}
+
+function mapDispatchToProps(dispatch: Dispatch) {
+    return {
+        actions: bindActionCreators({ setMe: setMeAction }, dispatch),
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Header)

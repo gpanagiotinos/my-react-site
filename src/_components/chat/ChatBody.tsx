@@ -1,9 +1,13 @@
 import React from 'react'
 import dayjs from 'dayjs'
+import { v1 } from 'uuid'
+import { connect } from 'react-redux'
+import { bindActionCreators, Dispatch } from 'redux'
 import { Card, CardActions, CardContent, CardHeader, InputAdornment, FormControl, Paper, Grid } from '@material-ui/core'
 import { Theme, makeStyles, withStyles, createStyles } from '@material-ui/core/styles'
 import { MaterialIcon, CustomTypography, CustomTextField } from '@/_components/general'
 import { Message } from '@/_types/chat'
+import { sendMessage } from '@/_store/chat/actions'
 
 const MessageTextField = withStyles((theme: Theme) =>
     createStyles({
@@ -66,83 +70,50 @@ const useStyles = makeStyles((theme: Theme) => ({
         padding: '5px',
     },
 }))
-const ChatBody: React.FC = () => {
+
+type Props = {
+    name: string
+    messages: Array<Message>
+    actions: {
+        sendMessage: typeof sendMessage
+    }
+}
+
+const ChatBody: React.FC<Props> = (props: Props) => {
     const classes = useStyles()
     const [currentMessage, setCurrentMessage] = React.useState('' as string)
-    const [messages, setMessages] = React.useState([] as Array<Message>)
+    // const [messages, setMessages] = React.useState([] as Array<Message>)
     // const [responses, setResponses] = React.useState([] as Array<Message>)
     const handleTypeMessage = (event: React.ChangeEvent<HTMLInputElement>) => {
         setCurrentMessage(event.currentTarget.value != null ? event.currentTarget.value : '')
     }
-    const handleResponse = (message: string, previousMessages: Array<Message>) => {
-        const test = message.split('').reverse().join('')
-        const loadingResponse = {
-            id: test,
-            room: '1',
-            sender: '2',
-            message: test,
-            loading: 'true',
-            isMe: false,
+    const handleSendMessage = (value: string) => {
+        setCurrentMessage('')
+        console.log(value)
+        props.actions.sendMessage({
+            id: v1(),
+            userId: '1',
+            chatRoomId: 'chat-room-id',
+            content: value,
             createdAt: dayjs().format(),
             updatedAt: dayjs().format(),
-        }
-        const responses = [...previousMessages, loadingResponse].sort((a, b) =>
-            dayjs(a.createdAt).isAfter(dayjs(b.createdAt)) ? 1 : -1,
-        )
-        setMessages(responses)
-        const timer = setTimeout(() => {
-            const response = {
-                id: test,
-                room: '1',
-                sender: '2',
-                message: test,
-                loading: 'false',
-                isMe: false,
-                updatedAt: dayjs().format(),
-            }
-            const index = responses.findIndex(({ id }) => {
-                return id === response.id
-            })
-            if (index >= 0) {
-                const previousResponses = [...responses]
-                previousResponses[index] = { ...previousResponses[index], ...response }
-                setMessages(
-                    [...previousResponses].sort((a, b) => (dayjs(a.createdAt).isAfter(dayjs(b.createdAt)) ? 1 : -1)),
-                )
-            } else {
-                setMessages(
-                    [
-                        ...responses,
-                        { ...response, createdAt: dayjs().format(), updatedAt: dayjs().format() },
-                    ].sort((a, b) => (dayjs(a.createdAt).isAfter(dayjs(b.createdAt)) ? 1 : -1)),
-                )
-            }
-        }, 500)
-        return timer
-    }
-    const handleSendMessage = (value: Message) => {
-        setCurrentMessage('')
-        const previousMessages = [...messages, value].sort((a, b) =>
-            dayjs(a.createdAt).isAfter(dayjs(b.createdAt)) ? 1 : -1,
-        )
-        setMessages(previousMessages)
-        handleResponse(value.message, previousMessages)
+        })
     }
     return (
         <Card elevation={0} className={classes.container}>
-            <CardHeader className={classes.header} title="Chat Room" />
+            <CardHeader className={classes.header} title={props.name} />
             <CardContent className={classes.content}>
                 <Grid container spacing={1}>
                     {(() => {
-                        return messages.map((message: Message, index: number) => {
-                            if (message.isMe) {
+                        return props.messages.map((message: Message, index: number) => {
+                            if (message.userId === '1') {
                                 return (
-                                    <Grid key={`${message.sender}_${index}`} item xs={12}>
+                                    <Grid key={`${message.userId}_${index}`} item xs={12}>
                                         <Grid container justify="flex-end" spacing={1}>
                                             <Grid item xs={4} className={classes.bubbleContainer}>
                                                 <Paper className={classes.message} elevation={1}>
                                                     <CustomTypography loading={'false'}>
-                                                        {message.message}
+                                                        {message.content}
                                                     </CustomTypography>
                                                 </Paper>
                                             </Grid>
@@ -151,13 +122,11 @@ const ChatBody: React.FC = () => {
                                 )
                             }
                             return (
-                                <Grid key={`${message.sender}_${index}`} item xs={12}>
+                                <Grid key={`${message.userId}_${index}`} item xs={12}>
                                     <Grid container justify="flex-start" spacing={1}>
                                         <Grid item xs={4} className={classes.bubbleContainer}>
                                             <Paper className={classes.response} elevation={1}>
-                                                <CustomTypography loading={message.loading}>
-                                                    {message.message}
-                                                </CustomTypography>
+                                                <CustomTypography loading={'false'}>{message.content}</CustomTypography>
                                             </Paper>
                                         </Grid>
                                     </Grid>
@@ -176,34 +145,12 @@ const ChatBody: React.FC = () => {
                             value={currentMessage}
                             variant="outlined"
                             onChange={handleTypeMessage}
-                            onEnterKey={() =>
-                                handleSendMessage({
-                                    id: currentMessage,
-                                    room: '1',
-                                    sender: '1',
-                                    message: currentMessage,
-                                    loading: 'false',
-                                    isMe: true,
-                                    createdAt: dayjs().format(),
-                                    updatedAt: dayjs().format(),
-                                })
-                            }
+                            onEnterKey={() => handleSendMessage(currentMessage)}
                             InputProps={{
                                 endAdornment: (
                                     <InputAdornment position="end">
                                         <MaterialIcon
-                                            onClick={() =>
-                                                handleSendMessage({
-                                                    id: currentMessage,
-                                                    room: '1',
-                                                    sender: '1',
-                                                    message: currentMessage,
-                                                    loading: 'false',
-                                                    isMe: true,
-                                                    createdAt: dayjs().format(),
-                                                    updatedAt: dayjs().format(),
-                                                })
-                                            }
+                                            onClick={() => handleSendMessage(currentMessage)}
                                             icon="SendIcon"
                                         />
                                     </InputAdornment>
@@ -217,4 +164,9 @@ const ChatBody: React.FC = () => {
     )
 }
 
-export default ChatBody
+function mapDispatchToProps(dispatch: Dispatch) {
+    return {
+        actions: bindActionCreators({ sendMessage: sendMessage }, dispatch),
+    }
+}
+export default connect(null, mapDispatchToProps)(ChatBody)

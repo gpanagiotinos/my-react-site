@@ -1,10 +1,14 @@
 export interface Message {
     id: string
-    room: string
-    message: string
-    sender: string
-    loading: string
-    isMe: boolean
+    userId: string
+    chatRoomId: string
+    content: string
     createdAt: string
     updatedAt: string
+}
+
+export interface ChatRoom {
+    id: string
+    name: string
+    messages: Array<Message>
 }
