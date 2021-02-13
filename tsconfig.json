@@ -26,6 +26,6 @@
         "build",
         "webpack.config.js",
         "configuration",
-        "graphql"
+        "graphql",
     ]
 }

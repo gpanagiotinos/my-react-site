@@ -73,7 +73,7 @@ const Header: React.FC<Props> = (props: Props) => {
                     <Grid item component={Link} to="/" className={[classes.item, classes.headerToolBar].join(' ')}>
                         blog
                     </Grid>
-                    {(() => {
+                    {/* {(() => {
                         if (props.state.auth != null) {
                             return (
                                 <Grid
@@ -96,7 +96,7 @@ const Header: React.FC<Props> = (props: Props) => {
                                 login
                             </Grid>
                         )
-                    })()}
+                    })()} */}
                 </Grid>
             </Toolbar>
         </AppBar>

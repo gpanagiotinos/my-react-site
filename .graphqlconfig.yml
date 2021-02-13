@@ -1,8 +1,8 @@
 projects:
   myreactsitegqlapi:
-    schemaPath: src/graphql/schema.json
+    schemaPath: amplify/backend/api/myreactsitegqlapi/build/schema.graphql
     includes:
-      - /graphql/**/*.ts
+      - src/graphql/**/*.ts
     excludes:
       - ./amplify/**
     extensions:
@@ -10,6 +10,9 @@ projects:
         codeGenTarget: typescript
         generatedFileName: src/_services/chat.service.ts
         docsFilePath: src/graphql
+        region: eu-west-1
+        apiId: null
+        maxDepth: 2
 extensions:
   amplify:
     version: 3

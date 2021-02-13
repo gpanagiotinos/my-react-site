@@ -24,8 +24,8 @@ const App: React.FC = () => (
                     <Switch>
                         <Route exact path="/" component={Body} />
                         <Route exact path="/resume" component={Resume} />
-                        <Route exact path="/chat" component={Chat} />
-                        <Route exact path="/login" component={Login} />
+                        {/* <Route exact path="/chat" component={Chat} /> */}
+                        {/* <Route exact path="/login" component={Login} /> */}
                     </Switch>
                 </div>
                 <Footer />

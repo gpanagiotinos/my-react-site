@@ -6,7 +6,7 @@ import { bindActionCreators, Dispatch } from 'redux'
 import { Card, CardActions, CardContent, CardHeader, InputAdornment, FormControl, Paper, Grid } from '@material-ui/core'
 import { Theme, makeStyles, withStyles, createStyles } from '@material-ui/core/styles'
 import { MaterialIcon, CustomTypography, CustomTextField } from '@/_components/general'
-import { Message } from '@/_types/chat'
+import { ChatMessage } from '@/_types/graphql'
 import { sendMessage } from '@/_store/chat/actions'
 
 const MessageTextField = withStyles((theme: Theme) =>
@@ -73,7 +73,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 type Props = {
     name: string
-    messages: Array<Message>
+    messages: Array<ChatMessage>
     actions: {
         sendMessage: typeof sendMessage
     }
@@ -105,7 +105,7 @@ const ChatBody: React.FC<Props> = (props: Props) => {
             <CardContent className={classes.content}>
                 <Grid container spacing={1}>
                     {(() => {
-                        return props.messages.map((message: Message, index: number) => {
+                        return props.messages.map((message: ChatMessage, index: number) => {
                             if (message.userId === '1') {
                                 return (
                                     <Grid key={`${message.userId}_${index}`} item xs={12}>

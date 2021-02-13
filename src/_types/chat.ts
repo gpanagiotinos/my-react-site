@@ -1,3 +1,4 @@
+import { ChatUser } from '@/_types/graphql'
 export interface Message {
     id: string
     userId: string
@@ -10,5 +11,6 @@ export interface Message {
 export interface ChatRoom {
     id: string
     name: string
+    user: ChatUser | null
     messages: Array<Message>
 }

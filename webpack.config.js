@@ -3,7 +3,7 @@ const path = require('path')
 
 module.exports = {
     mode: 'development',
-
+    devtool: 'source-map',
     // Enable sourcemaps for debugging webpack's output.
     // devtool: 'cheap-module-eval-source-map',
 
